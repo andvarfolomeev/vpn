@@ -95,7 +95,7 @@ class WGTunelConfigStrBuilder(WGConfigStrBuilder):
         self.add_variables(
             [
                 ("PublicKey", server.keys.public_key),
-                ("AllowedIPs", "0.0.0.0"),
+                ("AllowedIPs", "0.0.0.0/0"),
                 ("Endpoint", f"{server.ip_address}:{server.listen_port}"),
                 ("PersistentKeepalive", "20"),
             ]

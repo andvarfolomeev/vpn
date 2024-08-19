@@ -1,3 +1,5 @@
+from ipaddress import ip_address
+
 from wg_wrapper.config import WGInterfaceConfigWritter
 from wg_wrapper.schemas import WGKeys, WGServerConfig
 from wg_wrapper.wrapper import WGWrapper
@@ -25,16 +27,13 @@ class WG0Service:
         keys = await self.get_wg0_keys()
         server_config = WGServerConfig(
             WGKeys(private_key=keys.private_key, public_key=keys.public_key),
+            ip_address=settings.IP_ADDRESS,
             address="10.0.0.1/24",
             listen_port=settings.WG0_LISTEN_PORT,
-            pre_up=[],
-            post_up=[
-                "iptables -A FORWARD -i %i -j ACCEPT; iptables -t nat -A POSTROUTING -o en0 -j MASQUERADE"
-            ],
-            pre_down=[],
-            post_down=[
-                "iptables -D FORWARD -i %i -j ACCEPT; iptables -t nat -D POSTROUTING -o en0 -j MASQUERADE"
-            ],
+            pre_up=[settings.WG0_PRE_UP],
+            post_up=[settings.WG0_POST_UP],
+            pre_down=[settings.WG0_PRE_DOWN],
+            post_down=[settings.WG0_POST_DOWN],
         )
         return server_config
 

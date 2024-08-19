@@ -23,6 +23,7 @@ class WGPeerConfig:
 @dataclass
 class WGServerConfig:
     keys: WGKeys
+    ip_address: str
     address: str
     listen_port: str | int
     pre_up: list[str]

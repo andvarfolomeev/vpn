@@ -9,6 +9,8 @@ class Settings(BaseSettings):
     POSTGRES_USER: str = Field()
     POSTGRES_PASSWORD: str = Field()
 
+    IP_ADDRESS: str = Field()
+
     WG0_INTERFACE: str = Field(default="wg0")
     WG0_ADDRESS: str = Field()
     WG0_LISTEN_PORT: str = Field()

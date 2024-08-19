@@ -28,10 +28,3 @@ async def delete_peer_handler(uow: UnitOfWorkDep, public_key: str):
         await PeerService(uow).delete_peer(public_key)
         await uow.commit()
     return {}
-
-
-@peer_router.post("/truncate")
-async def truncate_peer_handler(uow: UnitOfWorkDep):
-    async with uow:
-        await PeerService(uow).truncate()
-    return {}

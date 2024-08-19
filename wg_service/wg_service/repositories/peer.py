@@ -25,7 +25,6 @@ class WGPeerRepository(Repository):
         return res.scalars().all()
 
     async def delete_one(self, public_key: str) -> None:
-        print(public_key)
         stmt = delete(PeerModel).where(PeerModel.public_key == public_key)
         await self.session.execute(stmt)
 

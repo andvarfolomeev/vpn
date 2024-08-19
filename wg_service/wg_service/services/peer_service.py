@@ -45,7 +45,6 @@ class PeerService:
             raise HTTPException(404, detail="Peer does not exist")
         peer_config = self.get_peer_config(peer)
         schema = await self.get_peer_schema(peer_config)
-        print(schema.config)
         return schema
 
     async def add_existed_peers(self) -> None:
@@ -66,7 +65,6 @@ class PeerService:
         peer_config = self.get_peer_config(peer)
         await WGWrapper.add_peer(settings.WG0_INTERFACE, peer_config)
         schema = await self.get_peer_schema(peer_config)
-        print(schema.config)
         return schema
 
     async def delete_peer(self, public_key: str) -> None:

@@ -26,5 +26,3 @@ async def lifespan(_):
 app = FastAPI(lifespan=lifespan)  # type: ignore
 
 app.include_router(router=v1_router)
-
-print(settings)

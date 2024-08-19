@@ -4,7 +4,6 @@ from wg_wrapper.schemas import CommandResult
 
 
 async def run_command(cmd: str) -> CommandResult:
-    print(f"'{cmd}' is running")
     process = await asyncio.create_subprocess_shell(
         cmd, stdout=asyncio.subprocess.PIPE, stderr=asyncio.subprocess.PIPE
     )

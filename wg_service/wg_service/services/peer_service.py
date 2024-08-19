@@ -13,7 +13,7 @@ from wg_service.settings import settings
 from wg_service.unit_of_work.unit_of_work import UnitOfWork
 
 
-class WGService:
+class PeerService:
 
     def __init__(self, uow: UnitOfWork):
         self.uow = uow

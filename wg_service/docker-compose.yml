@@ -1,0 +1,32 @@
+services:
+  wg-service:
+    build:
+      context: ..
+      dockerfile: wg_service/Dockerfile
+    cap_add:
+      - NET_ADMIN
+      - SYS_MODULE
+    devices:
+      - /dev/net/tun:/dev/net/tun
+    sysctls:
+      - net.ipv4.conf.all.src_valid_mark=1
+      - net.ipv4.ip_forward=1
+    volumes:
+      - /lib/modules:/lib/modules:ro
+    ports:
+      - "51871:51871/udp"
+      - "8000:8000"
+
+  postgres:
+    image: postgres
+    restart: always
+    expose:
+      - 5432
+    ports:
+      - "5432:5432"
+    environment:
+      POSTGRES_DB: ${WG_SERVICE_POSTGRES_DB}
+      POSTGRES_EXTERNAL_PORT: ${WG_SERVICE_POSTGRES_EXTERNAL_PORT}
+      POSTGRES_USER: ${WG_SERVICE_POSTGRES_HOST}
+      POSTGRES_PASSWORD: ${WG_SERVICE_POSTGRES_PASSWORD}
+      PGDATA: "/var/lib/postgresql/data/pgdata"
